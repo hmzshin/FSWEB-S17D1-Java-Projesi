@@ -6,36 +6,30 @@ import org.springframework.web.bind.annotation.*;
 import java.util.*;
 
 @RestController
+@RequestMapping(path = "/animal")
 public class AnimalController {
 
     Map<Integer, Animal> animals = new HashMap<>();
 
-    @RequestMapping("/")
-    public String hello() {
-        return "Welcome to our new animal api!";
-    }
-
-    @GetMapping("/animals")
+    @GetMapping
     public List<Animal> getAnimals() {
         return animals.values().stream().toList();
     }
 
-    @GetMapping("/animals/{id}")
+    @GetMapping("/{id}")
     public Animal getAnimals(@PathVariable int id) {
         return animals.get(id);
     }
 
-    @PostMapping("/animals")
+    @PostMapping
     public Animal setAnimal(@RequestBody Animal animal) {
         animals.put(animal.getId(), animal);
-
         return animals.get(animal.getId());
     }
 
-    @PutMapping("/animals/{id}")
+    @PutMapping("/{id}")
     public Animal updateAnimal(@RequestBody Animal animal, @PathVariable int id) {
         animals.put(id, animal);
-
 
         return animals.get(id);
     }
@@ -43,7 +37,6 @@ public class AnimalController {
     @DeleteMapping("/animals/{id}")
     public Animal deleteAnimal(@PathVariable int id, @RequestBody Animal animal) {
         animals.remove(id);
-
 
         return animal;
     }

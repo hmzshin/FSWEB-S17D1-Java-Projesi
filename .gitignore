@@ -1,3 +1,5 @@
 .idea
 target
 External Libraries
+.vscode/
+.settings/
